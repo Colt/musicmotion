@@ -1,0 +1,75 @@
+body {
+	font-family: Helvetica, Arial, "sans serif";
+	font-size: 12px;
+}
+
+video, #info, #description {
+	display: none;
+}
+img{
+	display: none;
+}
+
+#video-demo {
+	display: none;
+	position: absolute;
+	top: 150px;
+	left: 10px;
+}
+
+#canvas-source {
+	display: none;
+	position: absolute;
+	top: 40px;
+	left: 10px;
+}
+
+#canvas-blended {
+	/*display: none;*/
+	position: absolute;
+	/*top: 407px;
+	left: 500px;
+	width: 150px;
+	height: 113px;*/
+}
+
+#xylo {
+	display:none;
+	position: absolute;
+	top: 40px;
+	left: 10px;
+	margin: 0px;
+	padding: 0px;
+	border: 1px solid yellow;
+}
+#xylo #back {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index:0;
+}
+#xylo #front {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index:1;
+	width: 640px;
+	margin: 0px;
+	padding: 0px;
+}
+#xylo #back img, #xylo #front img {
+	margin: 0px;
+	padding: 0px;
+}
+#xylo #front img {
+	position: absolute;
+	display: none;
+}
+#xylo #note0 { left: 0px; }
+#xylo #note1 { left: 82px; }
+#xylo #note2 { left: 159px; }
+#xylo #note3 { left: 238px; }
+#xylo #note4 { left: 313px; }
+#xylo #note5 { left: 390px; }
+#xylo #note6 { left: 468px; }
+#xylo #note7 { left: 544px; }
