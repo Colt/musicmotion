@@ -1,4 +1,18 @@
 (function() {
+	var rval = 0;
+	var clicked = false;
+
+$( "button" ).click(function() {
+	if(clicked){
+		rval = 0;
+		clicked = false;
+	}
+	else{
+		rval = 8;
+		clicked = true;
+	}
+});
+
 
 	function hasGetUserMedia() {
 		// Note: Opera builds are unprefixed.
@@ -43,8 +57,8 @@
 		null
 	);
 
-	var notesPos = [0, 82, 159, 238, 313, 390, 468, 544];
-	var notesPos2 = [0, 82, 159, 238, 313, 390, 468, 500];
+	var notesPos = [0, 82, 159, 238, 313, 390, 468, 544,0, 82, 159, 238, 313, 390, 468, 544];
+	var notesPos2 = [0, 82, 159, 238, 313, 390, 468, 500,0, 82, 159, 238, 313, 390, 468, 500];
 
 	var timeOut, lastImageData;
 	var canvasSource = $("#canvas-source")[0];
@@ -56,6 +70,8 @@
 	var soundContext;
 	var bufferLoader;
 	var notes = [];
+
+
 
 	// mirror video
 	contextSource.translate(canvasSource.width, 0);
@@ -83,15 +99,42 @@
 				'Notes/violin_A4_1_fortissimo_arco-normal.mp3',
 				'Notes/violin_B4_1_forte_con-sord.mp3',
 				'Notes/violin_C5_1_forte_con-sord.mp3',
-				'Notes/violin_D5_1_forte_arco-normal.mp3'
+				'Notes/violin_D5_1_forte_arco-normal.mp3',
+				'Notes2/cello_A2_1_forte_arco-normal.mp3',
+				'Notes2/cello_B2_1_forte_arco-normal.mp3',
+				'Notes2/cello_C3_1_forte_arco-normal.mp3',
+				'Notes2/cello_D3_1_forte_arco-normal.mp3',
+				'Notes2/cello_E3_1_forte_arco-normal.mp3',
+				'Notes2/cello_F3_1_forte_arco-normal.mp3',
+				'Notes2/cello_G3_1_forte_arco-normal.mp3',
+				'Notes2/cello_A3_1_forte_arco-normal.mp3'
 			],
 			finishedLoading
 		);
 		bufferLoader.load();
 	}
 
+	// function loadSounds2() {
+	// 	soundContext = new AudioContext();
+	// 	console.log("Loading New Sounds")
+	// 	bufferLoader = new BufferLoader(soundContext,
+	// 		[
+	// 			'Notes2/cello_A2_1_forte_arco-normal.mp3',
+	// 			'Notes2/cello_B2_1_forte_arco-normal.mp3',
+	// 			'Notes2/cello_C3_1_forte_arco-normal.mp3',
+	// 			'Notes2/cello_D3_1_forte_arco-normal.mp3',
+	// 			'Notes2/cello_E3_1_forte_arco-normal.mp3',
+	// 			'Notes2/cello_F3_1_forte_arco-normal.mp3',
+	// 			'Notes2/cello_G3_1_forte_arco-normal.mp3',
+	// 			'Notes2/cello_A3_1_forte_arco-normal.mp3'
+	// 		],
+	// 		finishedLoading
+	// 	);
+	// 	bufferLoader.load();
+	// }
+
 	function finishedLoading(bufferList) {
-		for (var i=0; i<8; i++) {
+		for (var i=0; i<16; i++) {
 			var source = soundContext.createBufferSource();
 			source.buffer = bufferList[i];
 			source.connect(soundContext.destination);
@@ -103,6 +146,7 @@
 			note.area = {x:notesPos[i], y:notesPos2[i], width:note.visual.width, height:100};
 			notes.push(note);
 		}
+		console.log(notes);
 		start();
 	}
 
@@ -196,8 +240,9 @@
 	}
 
 	function checkAreas() {
+		console.log(rval);
 		// loop over the note areas
-		for (var r=0; r<8; ++r) {
+		for (var r=rval; r<rval+8; ++r) {
 			// get the pixels in a note area from the blended image
 			var blendedData = contextBlended.getImageData(notes[r].area.x, notes[r].area.y, notes[r].area.width, notes[r].area.height);
 			var i = 0;
@@ -220,5 +265,10 @@
 		}
 	}
 
-
 })();
+
+
+
+
+
+

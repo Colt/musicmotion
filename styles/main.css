@@ -17,6 +17,10 @@ img{
 	left: 10px;
 }
 
+button{
+	float:right;
+}
+
 #canvas-source {
 	display: none;
 	position: absolute;
