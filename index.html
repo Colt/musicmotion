@@ -7,7 +7,7 @@
 <body>
 
 <div id="description">Make Sounds</div>
-<div id="message">Loading assets...</div>
+<div id="message">Loading a bunch of stuff... I mean like a ton of stuff...</div>
 <div id="info" style="display:none">
 	<p>You are watching a video demo, follow the instructions below to enable your webcam.</p>
 	<p>Please view this page using <a href="http://tools.google.com/dlpage/chromesxs" target="_blank">Google Chrome Canary</a> and enable the "Media Stream" flag in about:flags.</p>
@@ -15,7 +15,7 @@
 </div>
 
 <!--<device type="media"></device>-->
-<video id="webcam" autoplay width="640" height="480"></video>
+<video id="webcam" autoplay width="1280" height="960"></video>
 
 <video id="video-demo" controls="controls" poster="videos/jsdetection.jpg" width="640" height="480"  onclick="if(/Android/.test(navigator.userAgent))this.play();">
 	<source src="videos/jsdetection.mp4" type="video/mp4" />
@@ -24,8 +24,8 @@
 	Your browser doesn't support the html 5 video tag.
 </video>
 
-<canvas id="canvas-source" width="640" height="480"></canvas>
-<canvas id="canvas-blended" width="640" height="480"></canvas>
+<canvas id="canvas-source" width="1280" height="960"></canvas>
+<canvas id="canvas-blended" width="1280" height="960"></canvas>
 
 <div id="xylo">
 	<div id="back"><img id="xyloback" src="images/xylo.png"/></div>
@@ -48,7 +48,38 @@
 		<img id="note15" src="images/note8.png"/>
 	</div>
 </div>
-<button>SWITCH</button>
+<div>
+<button class="top">Along The Top</button>
+<button class="diagonal">Diagonal</button>
+<button class="topside">Top and Left</button>
+<button class="sides">Right and Left</button>
+<button class="random">Random</button>
+</div>
+<br>
+<br>
+<div>
+	<button class="">Major Scale</button>
+	<button class="">Minor Scale</button>
+</div>
+
+
+
+<div class="circle1"></div>
+<div class="circle2"></div>
+<div class="circle3"></div>
+<div class="circle4"></div>
+<div class="circle5"></div>
+<div class="circle6"></div>
+<div class="circle7"></div>
+<div class="circle8"></div>
+<div class="circle9"></div>
+<div class="circle10"></div>
+<div class="circle11"></div>
+<div class="circle12"></div>
+<div class="circle13"></div>
+<div class="circle14"></div>
+<div class="circle15"></div>
+<div class="circle16"></div>
 
 
 <script src="js/libs/jquery.js"></script>

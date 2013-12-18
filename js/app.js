@@ -2,16 +2,79 @@
 	var rval = 0;
 	var clicked = false;
 
-$( "button" ).click(function() {
-	if(clicked){
-		rval = 0;
-		clicked = false;
-	}
-	else{
-		rval = 8;
-		clicked = true;
+$( ".top" ).click(function() {
+	if (currentlayout != "top"){
+	notesPos = [0, 80, 160, 240, 320, 400, 480, 560, 640, 720, 800, 880, 960, 1040, 1120, 1200];
+	// notesPos = [200, 200, 200, 200, 200, 200, 200, 200, 1200, 1200, 1200, 1200, 1200, 1200, 1200, 1200];
+	notesPos2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+	currentlayout = "top";
+	initialize();
+	movedots();
+}
+});
+
+$( ".diagonal" ).click(function() {
+	if (currentlayout != "diagonal"){
+		console.log("CHANGING");
+	notesPos = [0, 80, 160, 240, 320, 400, 480, 560, 640, 720, 800, 880, 960, 1040, 1120, 1200];
+	notesPos2 = [0, 60, 120, 180, 240, 300, 360, 420, 480, 540, 600, 660, 720, 780, 840, 900];
+	currentlayout = "diagonal";
+	initialize();
+	movedots();
 	}
 });
+
+$( ".sides" ).click(function() {
+	if (currentlayout != "sides"){
+	notesPos = [0, 0, 0, 0, 0, 0, 0, 0, 1200, 1200, 1200, 1200, 1200, 1200, 1200, 1200];
+	notesPos2 = [0, 120, 240, 360, 480, 600, 720, 840, 0, 120, 240, 360, 480, 600, 720, 840];
+	currentlayout = "sides";
+	initialize();
+	movedots();
+	}
+});
+
+$( ".topside" ).click(function() {
+	if (currentlayout != "topside"){
+	notesPos = [0, 0, 0, 0, 0, 0, 0, 0, 182, 365, 548, 731, 914, 1097, 1280, 0];
+	notesPos2 = [0, 120, 240, 360, 480, 600, 720, 840, 0, 0, 0, 0, 0, 0, 0, 0];
+	currentlayout = "topside";
+	initialize();
+	movedots();
+	}
+});
+
+$( ".random" ).click(function() {
+	// if (currentlayout != "random"){
+	// notesPos = [0, 0, 0, 0, 0, 0, 0, 0, 182, 365, 548, 731, 914, 1097, 1280, 0];
+	// notesPos2 = [0, 120, 240, 360, 480, 600, 720, 840, 0, 0, 0, 0, 0, 0, 0, 0];
+	var arrx = [];
+	var arry = [];
+	for (var i = 0, l = 1280; i < l; i++) {
+    arrx.push(Math.round(Math.random() * l))
+	}
+	for (var i = 0, l = 960; i < l; i++) {
+    arry.push(Math.round(Math.random() * l))
+	}
+	notesPos = arrx
+	notesPos2 = arry
+	currentlayout = "random";
+	initialize();
+	movedots();
+	// }
+});
+
+
+
+function movedots(){
+	$(".circle1").css( "background-color", "blue" );
+	$(".circle1").css( "left", "500px" );
+	for (var i=1; i<17; ++i) {
+		$(".circle"+i.toString()).css( "left", notesPos[i-1].toString()+"px" );
+		$(".circle"+i.toString()).css( "top", notesPos2[i-1].toString()+"px" );
+	}
+
+}
 
 
 	function hasGetUserMedia() {
@@ -57,8 +120,15 @@ $( "button" ).click(function() {
 		null
 	);
 
-	var notesPos = [0, 82, 159, 238, 313, 390, 468, 544,0, 82, 159, 238, 313, 390, 468, 544];
-	var notesPos2 = [0, 82, 159, 238, 313, 390, 468, 500,0, 82, 159, 238, 313, 390, 468, 500];
+
+
+	// For Diagonal Layout
+	// var notesPos = [0, 80, 160, 240, 320, 400, 480, 560, 640, 720, 800, 880, 960, 1040, 1120, 1200];
+	// var notesPos2 = [0, 60, 120, 180, 240, 300, 360, 420, 480, 540, 600, 660, 720, 780, 840, 900];
+
+	var notesPos = [0, 0, 0, 0, 0, 0, 0, 0, 1200, 1200, 1200, 1200, 1200, 1200, 1200, 1200];
+	var notesPos2 = [0, 120, 240, 360, 480, 600, 720, 840, 0, 120, 240, 360, 480, 600, 720, 840];
+	var notes3 = [261.63,293.66,329.63,349.23,392.00,440.00,493.88,523.25];
 
 	var timeOut, lastImageData;
 	var canvasSource = $("#canvas-source")[0];
@@ -67,9 +137,11 @@ $( "button" ).click(function() {
 	var contextSource = canvasSource.getContext('2d');
 	var contextBlended = canvasBlended.getContext('2d');
 
-	var soundContext;
+	var soundContext = new AudioContext();
 	var bufferLoader;
 	var notes = [];
+	var currentlayout = "sides";
+
 
 
 
@@ -89,7 +161,9 @@ $( "button" ).click(function() {
 	}
 
 	function loadSounds() {
-		soundContext = new AudioContext();
+		notes = [];
+		console.log("LOADING");
+		console.log(notesPos);
 		bufferLoader = new BufferLoader(soundContext,
 			[
 				'Notes/violin_D4_1_forte_con-sord.mp3',
@@ -100,15 +174,33 @@ $( "button" ).click(function() {
 				'Notes/violin_B4_1_forte_con-sord.mp3',
 				'Notes/violin_C5_1_forte_con-sord.mp3',
 				'Notes/violin_D5_1_forte_arco-normal.mp3',
-				'Notes2/cello_A2_1_forte_arco-normal.mp3',
-				'Notes2/cello_B2_1_forte_arco-normal.mp3',
-				'Notes2/cello_C3_1_forte_arco-normal.mp3',
 				'Notes2/cello_D3_1_forte_arco-normal.mp3',
 				'Notes2/cello_E3_1_forte_arco-normal.mp3',
 				'Notes2/cello_F3_1_forte_arco-normal.mp3',
 				'Notes2/cello_G3_1_forte_arco-normal.mp3',
-				'Notes2/cello_A3_1_forte_arco-normal.mp3'
+				'Notes2/cello_A3_1_forte_arco-normal.mp3',
+				'Notes2/cello_B3_1_fortissimo_arco-normal.mp3',
+				'Notes2/cello_C4_1_forte_arco-normal.mp3',
+				'Notes2/cello_D4_1_forte_arco-normal.mp3'
 			],
+			// [
+			// 	'Notes/violin_D4_1_forte_con-sord.mp3',
+			// 	'Notes/violin_E4_1_forte_con-sord.mp3',
+			// 	'Notes/violin_F4_1_forte_con-sord.mp3',
+			// 	'Notes/violin_G4_1_forte_arco-normal.mp3',
+			// 	'Notes/violin_A4_1_fortissimo_arco-normal.mp3',
+			// 	'Notes/violin_B4_1_forte_con-sord.mp3',
+			// 	'Notes/violin_C5_1_forte_con-sord.mp3',
+			// 	'Notes/violin_D5_1_forte_arco-normal.mp3',
+			// 	'Notes2/cello_A2_1_forte_arco-normal.mp3',
+			// 	'Notes2/cello_B2_1_forte_arco-normal.mp3',
+			// 	'Notes2/cello_C3_1_forte_arco-normal.mp3',
+			// 	'Notes2/cello_D3_1_forte_arco-normal.mp3',
+			// 	'Notes2/cello_E3_1_forte_arco-normal.mp3',
+			// 	'Notes2/cello_F3_1_forte_arco-normal.mp3',
+			// 	'Notes2/cello_G3_1_forte_arco-normal.mp3',
+			// 	'Notes2/cello_A3_1_forte_arco-normal.mp3'
+			// ],
 			finishedLoading
 		);
 		bufferLoader.load();
@@ -134,6 +226,10 @@ $( "button" ).click(function() {
 	// }
 
 	function finishedLoading(bufferList) {
+		console.log("FINISHED LOADING");
+		if (source){
+			source.disconnect();
+		}
 		for (var i=0; i<16; i++) {
 			var source = soundContext.createBufferSource();
 			source.buffer = bufferList[i];
@@ -151,6 +247,7 @@ $( "button" ).click(function() {
 	}
 
 	function playSound(obj) {
+
 		if (!obj.ready) return;
 		var source = soundContext.createBufferSource();
 		source.buffer = obj.note.buffer;
@@ -240,9 +337,9 @@ $( "button" ).click(function() {
 	}
 
 	function checkAreas() {
-		console.log(rval);
+		// console.log(rval);
 		// loop over the note areas
-		for (var r=rval; r<rval+8; ++r) {
+		for (var r=0; r<16; ++r) {
 			// get the pixels in a note area from the blended image
 			var blendedData = contextBlended.getImageData(notes[r].area.x, notes[r].area.y, notes[r].area.width, notes[r].area.height);
 			var i = 0;
@@ -260,7 +357,7 @@ $( "button" ).click(function() {
 				// play a note and show a visual feedback to the user
 				playSound(notes[r]);
 				// notes[r].visual.style.display = "block";
-				$(notes[r].visual).fadeOut();
+				// $(notes[r].visual).fadeOut();
 			}
 		}
 	}
