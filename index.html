@@ -2,27 +2,30 @@
 <html>
 <head>
 	<title>Javascript motion detection</title>
+
+	<link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+
 	<link rel="stylesheet" href="styles/main.css"/>
 </head>
 <body>
+	<h1>Motion Music</h1>
 
-<div id="description">Make Sounds</div>
-<div id="message">Loading a bunch of stuff... I mean like a ton of stuff...</div>
+<!-- <div id="message">Loading a bunch of stuff... I mean like a ton of stuff...</div> -->
 <div id="info" style="display:none">
-	<p>You are watching a video demo, follow the instructions below to enable your webcam.</p>
 	<p>Please view this page using <a href="http://tools.google.com/dlpage/chromesxs" target="_blank">Google Chrome Canary</a> and enable the "Media Stream" flag in about:flags.</p>
 	<img src="images/mediastream.png"/>
 </div>
 
+<ul class="loader">
+	<li></li>
+	<li></li>
+	<li></li>
+</ul>
+
 <!--<device type="media"></device>-->
 <video id="webcam" autoplay width="1280" height="960"></video>
 
-<video id="video-demo" controls="controls" poster="videos/jsdetection.jpg" width="640" height="480"  onclick="if(/Android/.test(navigator.userAgent))this.play();">
-	<source src="videos/jsdetection.mp4" type="video/mp4" />
-	<source src="videos/jsdetection.ogv" type="video/ogg" />
-	<source src="videos/jsdetection.webm" type="video/webm" />
-	Your browser doesn't support the html 5 video tag.
-</video>
 
 <canvas id="canvas-source" width="1280" height="960"></canvas>
 <canvas id="canvas-blended" width="1280" height="960"></canvas>
@@ -57,13 +60,14 @@
 </div>
 <br>
 <br>
-<div>
+<ul>
 	<button class="hidedots">Hide Dots</button>
+	<button class="mand">Banjo</button>
 	<button class="major">Major Scale</button>
 	<button class="minor">Minor Scale</button>
-	<button class="number">Change Number</button>
+	<button class="pizz">Pizz</button>
 	<button class="display">Change Display</button>
-</div>
+</ul>
 
 
 <div id="circle1"></div>
@@ -88,6 +92,9 @@
 <script src="js/libs/jquery.js"></script>
 <script src="js/libs/buffer-loader.js"></script>
 <script src="js/app.js"></script>
+
+
+
 
 </body>
 </html>

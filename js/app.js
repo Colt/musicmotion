@@ -1,4 +1,13 @@
+// $(window).load(function() {
+// 			// Animate loader off screen
+// 			$(".loader").animate({
+// 				top: -200
+// 			}, 1500);
+// 		});
+
 (function() {
+
+
 	var rval = 0;
 	var clicked = false;
 
@@ -76,19 +85,24 @@ $( ".hidedots" ).click(function() {
 });
 
 $( ".major" ).click(function() {
-	major = true;
+	scale = "major";
 	initialize();
 });
 
 $( ".minor" ).click(function() {
-	major = false;
+	scale = "minor";
 	initialize();
 });
 
-$( ".number" ).click(function() {
-	num = 8;
+$( ".pizz" ).click(function() {
+	scale = "pizz";
 	initialize();
 });
+$( ".mand" ).click(function() {
+	scale = "mand";
+	initialize();
+});
+
 
 $( ".display" ).click(function() {
 	if(bw){
@@ -207,6 +221,7 @@ function changeColor(r, color){
 	var currentlayout = "sides";
 	var hidden = false;
 	var major = false;
+	var scale = "major";
 	var num = 16;
 	var bw = true;
 
@@ -231,31 +246,77 @@ function changeColor(r, color){
 		notes = [];
 		console.log("LOADING");
 		console.log(notesPos);
-		if(major){
+		if(scale == "pizz"){
 		bufferLoader = new BufferLoader(soundContext,
 			[
-				'Notes/violin_D4_1_forte_con-sord.mp3',
-				'Notes/violin_E4_1_forte_con-sord.mp3',
-				'Notes/violin_F4_1_forte_con-sord.mp3',
-				'Notes/violin_G4_1_forte_arco-normal.mp3',
-				'Notes/violin_A4_1_fortissimo_arco-normal.mp3',
-				'Notes/violin_B4_1_forte_con-sord.mp3',
-				'Notes/violin_C5_1_forte_con-sord.mp3',
-				'Notes/violin_D5_1_forte_arco-normal.mp3',
-				'Notes2/cello_D3_1_forte_arco-normal.mp3',
-				'Notes2/cello_E3_1_forte_arco-normal.mp3',
-				'Notes2/cello_F3_1_forte_arco-normal.mp3',
-				'Notes2/cello_G3_1_forte_arco-normal.mp3',
-				'Notes2/cello_A3_1_forte_arco-normal.mp3',
-				'Notes2/cello_B3_1_fortissimo_arco-normal.mp3',
-				'Notes2/cello_C4_1_forte_arco-normal.mp3',
-				'Notes2/cello_D4_1_forte_arco-normal.mp3'
+				'Notes2/1.mp3',
+				'Notes2/2.mp3',
+				'Notes2/3.mp3',
+				'Notes2/4.mp3',
+				'Notes2/5.mp3',
+				'Notes2/6.mp3',
+				'Notes2/7.mp3',
+				'Notes2/8.mp3',
+				'Notes2/1.mp3',
+				'Notes2/2.mp3',
+				'Notes2/3.mp3',
+				'Notes2/4.mp3',
+				'Notes2/5.mp3',
+				'Notes2/6.mp3',
+				'Notes2/7.mp3',
+				'Notes2/8.mp3'
+			],
+			finishedLoading
+		);
+	}
+	if(scale == "mand"){
+		bufferLoader = new BufferLoader(soundContext,
+			[
+				'Notes2//banjo/banjo_C3_very-long_forte_normal.mp3',
+				'Notes2/banjo/banjo_D3_very-long_forte_normal.mp3',
+				'Notes2/banjo/banjo_E3_very-long_forte_normal.mp3',
+				'Notes2/banjo/banjo_F3_very-long_forte_normal.mp3',
+				'Notes2/banjo/banjo_G3_very-long_forte_normal.mp3',
+				'Notes2/banjo/banjo_A3_very-long_forte_normal.mp3',
+				'Notes2/banjo/banjo_B3_very-long_forte_normal.mp3',
+				'Notes2/banjo/banjo_C4_very-long_forte_normal.mp3',
+				'Notes2/banjo/banjo_D4_very-long_forte_normal.mp3',
+				'Notes2/banjo/banjo_E4_very-long_forte_normal.mp3',
+				'Notes2/banjo/banjo_F4_very-long_forte_normal.mp3',
+				'Notes2/banjo/banjo_G4_very-long_piano_normal.mp3',
+				'Notes2/banjo/banjo_A4_very-long_forte_normal.mp3',
+				'Notes2/banjo/banjo_B4_very-long_forte_normal.mp3',
+				'Notes2/banjo/banjo_C5_very-long_forte_normal.mp3',
+				'Notes2/banjo/banjo_C6_very-long_forte_normal.mp3'
+			],
+			finishedLoading
+		);
+	}
+	if(scale == "minor"){
+		bufferLoader = new BufferLoader(soundContext,
+			[
+				'Notes2/a.mp3',
+				'Notes2/b.mp3',
+				'Notes2/c.mp3',
+				'Notes2/d.mp3',
+				'Notes2/e.mp3',
+				'Notes2/f.mp3',
+				'Notes2/g.mp3',
+				'Notes2/a2.mp3',
+				'Notes2/b2.mp3',
+				'Notes2/c2.mp3',
+				'Notes2/d2.mp3',
+				'Notes2/a.mp3',
+				'Notes2/b.mp3',
+				'Notes2/c.mp3',
+				'Notes2/d.mp3',
+				'Notes2/e.mp3'
 			],
 			finishedLoading
 		);
 	}
 
-	else{
+	if(scale == "major"){
 		bufferLoader = new BufferLoader(soundContext,
 			[
 				'Notes/violin_D4_1_forte_con-sord.mp3',
@@ -319,10 +380,14 @@ function changeColor(r, color){
 	}
 
 	function start() {
+		$(".loader").animate({
+				top: -200
+			}, 1500);
 		$(canvasSource).show();
 		$(canvasBlended).show();
-		$("#xylo").show();
+		$("h1").hide();
 		$("#message").hide();
+		$("button").show();
 		$("#description").show();
 		update();
 	}
