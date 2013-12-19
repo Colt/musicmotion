@@ -7,6 +7,9 @@
 	<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 
 	<link rel="stylesheet" href="styles/main.css"/>
+
+	<link rel="stylesheet" type="text/css" href="css/component.css" />
+		<script src="js/modernizr.custom.js"></script>
 </head>
 <body>
 	<h1>Motion Music</h1>
@@ -51,23 +54,16 @@
 		<img id="note15" src="images/note8.png"/>
 	</div>
 </div>
-<div>
-<button class="top">Along The Top</button>
-<button class="diagonal">Diagonal</button>
-<button class="topside">Top and Left</button>
-<button class="sides">Right and Left</button>
-<button class="random">Random</button>
-</div>
-<br>
-<br>
-<ul>
-	<button class="hidedots">Hide Dots</button>
-	<button class="mand">Banjo</button>
-	<button class="major">Major Scale</button>
-	<button class="minor">Minor Scale</button>
-	<button class="pizz">Pizz</button>
-	<button class="display">Change Display</button>
-</ul>
+<table cellspacing="20">
+
+<tr><td><button class="top">Along The Top</button></td><td><button class="hidedots">Hide Dots</button></td></tr>
+<tr><td><button class="diagonal">Diagonal</button></td><td><button class="mand">Banjo</button></td></tr>
+<tr><td><button class="topside">Top and Left</button></td><td><button class="major">Major Scale</button></td></tr>
+<tr><td><button class="sides">Sides</button></td><td><button class="minor">Minor Scale</button></td></tr>
+<tr><td><button class="random">Random</button></td><td><button class="pizz">Pizz</button></td></tr>
+	<tr><td colspan="2"><button class="display">Change Display</button></td></tr>
+</table>
+
 
 
 <div id="circle1"></div>
