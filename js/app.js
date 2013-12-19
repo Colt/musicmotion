@@ -64,11 +64,62 @@ $( ".random" ).click(function() {
 	// }
 });
 
+$( ".hidedots" ).click(function() {
+	hideDots();
+	// if (currentlayout != "topside"){
+	// notesPos = [0, 0, 0, 0, 0, 0, 0, 0, 182, 365, 548, 731, 914, 1097, 1280, 0];
+	// notesPos2 = [0, 120, 240, 360, 480, 600, 720, 840, 0, 0, 0, 0, 0, 0, 0, 0];
+	// currentlayout = "topside";
+	// initialize();
+	// movedots();
+	// }
+});
+
+$( ".major" ).click(function() {
+	major = true;
+	initialize();
+});
+
+$( ".minor" ).click(function() {
+	major = false;
+	initialize();
+});
+
+$( ".number" ).click(function() {
+	num = 8;
+	initialize();
+});
+
+$( ".display" ).click(function() {
+	if(bw){
+		$('#canvas-blended').css("z-index", "-20");
+		bw = false;
+	}
+	else{
+		$('#canvas-blended').css("z-index", "0");
+		bw = true;
+	}
+
+});
+
+
+function hideDots(){
+	if(hidden){
+		for (var i=1; i<17; ++i) {
+			$(".circle"+i.toString()).css( "display", "inline" );
+		}
+		hidden = false;
+	}
+	else {
+		for (var i=1; i<17; ++i) {
+			$(".circle"+i.toString()).css( "display", "none" );
+		}
+		hidden = true;
+	}
+}
 
 
 function movedots(){
-	$(".circle1").css( "background-color", "blue" );
-	$(".circle1").css( "left", "500px" );
 	for (var i=1; i<17; ++i) {
 		$(".circle"+i.toString()).css( "left", notesPos[i-1].toString()+"px" );
 		$(".circle"+i.toString()).css( "top", notesPos2[i-1].toString()+"px" );
@@ -76,6 +127,19 @@ function movedots(){
 
 }
 
+function changeColor(r, color){
+	if(color == "red"){
+		color = '#bdc3c7';
+		$(".circle"+r.toString()).css( "width", "50px");
+		$(".circle"+r.toString()).css( "height", "50px");
+	}
+	if(color == "blue"){
+		color = '#3498db';
+		$(".circle"+r.toString()).css( "width", "65px");
+		$(".circle"+r.toString()).css( "height", "65px");
+	}
+	$(".circle"+r.toString()).css( "background-color", color);
+}
 
 	function hasGetUserMedia() {
 		// Note: Opera builds are unprefixed.
@@ -141,7 +205,10 @@ function movedots(){
 	var bufferLoader;
 	var notes = [];
 	var currentlayout = "sides";
-
+	var hidden = false;
+	var major = false;
+	var num = 16;
+	var bw = true;
 
 
 
@@ -164,6 +231,7 @@ function movedots(){
 		notes = [];
 		console.log("LOADING");
 		console.log(notesPos);
+		if(major){
 		bufferLoader = new BufferLoader(soundContext,
 			[
 				'Notes/violin_D4_1_forte_con-sord.mp3',
@@ -183,47 +251,35 @@ function movedots(){
 				'Notes2/cello_C4_1_forte_arco-normal.mp3',
 				'Notes2/cello_D4_1_forte_arco-normal.mp3'
 			],
-			// [
-			// 	'Notes/violin_D4_1_forte_con-sord.mp3',
-			// 	'Notes/violin_E4_1_forte_con-sord.mp3',
-			// 	'Notes/violin_F4_1_forte_con-sord.mp3',
-			// 	'Notes/violin_G4_1_forte_arco-normal.mp3',
-			// 	'Notes/violin_A4_1_fortissimo_arco-normal.mp3',
-			// 	'Notes/violin_B4_1_forte_con-sord.mp3',
-			// 	'Notes/violin_C5_1_forte_con-sord.mp3',
-			// 	'Notes/violin_D5_1_forte_arco-normal.mp3',
-			// 	'Notes2/cello_A2_1_forte_arco-normal.mp3',
-			// 	'Notes2/cello_B2_1_forte_arco-normal.mp3',
-			// 	'Notes2/cello_C3_1_forte_arco-normal.mp3',
-			// 	'Notes2/cello_D3_1_forte_arco-normal.mp3',
-			// 	'Notes2/cello_E3_1_forte_arco-normal.mp3',
-			// 	'Notes2/cello_F3_1_forte_arco-normal.mp3',
-			// 	'Notes2/cello_G3_1_forte_arco-normal.mp3',
-			// 	'Notes2/cello_A3_1_forte_arco-normal.mp3'
-			// ],
 			finishedLoading
 		);
-		bufferLoader.load();
 	}
 
-	// function loadSounds2() {
-	// 	soundContext = new AudioContext();
-	// 	console.log("Loading New Sounds")
-	// 	bufferLoader = new BufferLoader(soundContext,
-	// 		[
-	// 			'Notes2/cello_A2_1_forte_arco-normal.mp3',
-	// 			'Notes2/cello_B2_1_forte_arco-normal.mp3',
-	// 			'Notes2/cello_C3_1_forte_arco-normal.mp3',
-	// 			'Notes2/cello_D3_1_forte_arco-normal.mp3',
-	// 			'Notes2/cello_E3_1_forte_arco-normal.mp3',
-	// 			'Notes2/cello_F3_1_forte_arco-normal.mp3',
-	// 			'Notes2/cello_G3_1_forte_arco-normal.mp3',
-	// 			'Notes2/cello_A3_1_forte_arco-normal.mp3'
-	// 		],
-	// 		finishedLoading
-	// 	);
-	// 	bufferLoader.load();
-	// }
+	else{
+		bufferLoader = new BufferLoader(soundContext,
+			[
+				'Notes/violin_D4_1_forte_con-sord.mp3',
+				'Notes/violin_G4_1_forte_arco-normal.mp3',
+				'Notes/violin_B4_1_forte_con-sord.mp3',
+				'Notes/violin_D5_1_forte_arco-normal.mp3',
+				'Notes/violin_A4_1_fortissimo_arco-normal.mp3',
+				'Notes2/cello_D3_1_forte_arco-normal.mp3',
+				'Notes2/cello_G3_1_forte_arco-normal.mp3',
+				'Notes2/cello_B3_1_fortissimo_arco-normal.mp3',
+				'Notes2/cello_D4_1_forte_arco-normal.mp3',
+				'Notes/violin_D4_1_forte_con-sord.mp3',
+				'Notes/violin_G4_1_forte_arco-normal.mp3',
+				'Notes/violin_B4_1_forte_con-sord.mp3',
+				'Notes/violin_D5_1_forte_arco-normal.mp3',
+				'Notes2/cello_D3_1_forte_arco-normal.mp3',
+				'Notes2/cello_G3_1_forte_arco-normal.mp3',
+				'Notes2/cello_B3_1_fortissimo_arco-normal.mp3'
+			],
+			finishedLoading
+		);
+	}
+		bufferLoader.load();
+	}
 
 	function finishedLoading(bufferList) {
 		console.log("FINISHED LOADING");
@@ -356,8 +412,12 @@ function movedots(){
 				// over a small limit, consider that a movement is detected
 				// play a note and show a visual feedback to the user
 				playSound(notes[r]);
+				changeColor(r+1, "blue");
 				// notes[r].visual.style.display = "block";
 				// $(notes[r].visual).fadeOut();
+			}
+			else{
+				changeColor(r+1, "red");
 			}
 		}
 	}
