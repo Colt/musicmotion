@@ -148,7 +148,7 @@ function changeColor(r, color){
 		$(".circle"+r.toString()).css( "height", "50px");
 	}
 	if(color == "blue"){
-		color = '#3498db';
+		color = bgcolorlist[Math.floor(Math.random()*bgcolorlist.length)]
 		$(".circle"+r.toString()).css( "width", "65px");
 		$(".circle"+r.toString()).css( "height", "65px");
 	}
@@ -207,6 +207,7 @@ function changeColor(r, color){
 	var notesPos = [0, 0, 0, 0, 0, 0, 0, 0, 1200, 1200, 1200, 1200, 1200, 1200, 1200, 1200];
 	var notesPos2 = [0, 120, 240, 360, 480, 600, 720, 840, 0, 120, 240, 360, 480, 600, 720, 840];
 	var notes3 = [261.63,293.66,329.63,349.23,392.00,440.00,493.88,523.25];
+	var bgcolorlist=new Array("#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#f1c40f", "#e67e22", "#e74c3c", "#95a5a6");
 
 	var timeOut, lastImageData;
 	var canvasSource = $("#canvas-source")[0];
