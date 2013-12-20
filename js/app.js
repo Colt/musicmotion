@@ -374,6 +374,7 @@ function changeColor(r, color){
 		$(canvasSource).show();
 		$(canvasBlended).show();
 		$("h1").hide();
+		$(".touch").hide();
 		$("#message").hide();
 		$("button").show();
 		$("#description").show();
