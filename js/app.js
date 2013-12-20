@@ -1,13 +1,5 @@
-// $(window).load(function() {
-// 			// Animate loader off screen
-// 			$(".loader").animate({
-// 				top: -200
-// 			}, 1500);
-// 		});
-
 (function() {
-
-
+// METHODS TO CHANGE STUFF
 	var rval = 0;
 	var clicked = false;
 
@@ -54,9 +46,6 @@ $( ".topside" ).click(function() {
 });
 
 $( ".random" ).click(function() {
-	// if (currentlayout != "random"){
-	// notesPos = [0, 0, 0, 0, 0, 0, 0, 0, 182, 365, 548, 731, 914, 1097, 1280, 0];
-	// notesPos2 = [0, 120, 240, 360, 480, 600, 720, 840, 0, 0, 0, 0, 0, 0, 0, 0];
 	var arrx = [];
 	var arry = [];
 	for (var i = 0, l = 1280; i < l; i++) {
@@ -70,18 +59,10 @@ $( ".random" ).click(function() {
 	currentlayout = "random";
 	initialize();
 	movedots();
-	// }
 });
 
 $( ".hidedots" ).click(function() {
 	hideDots();
-	// if (currentlayout != "topside"){
-	// notesPos = [0, 0, 0, 0, 0, 0, 0, 0, 182, 365, 548, 731, 914, 1097, 1280, 0];
-	// notesPos2 = [0, 120, 240, 360, 480, 600, 720, 840, 0, 0, 0, 0, 0, 0, 0, 0];
-	// currentlayout = "topside";
-	// initialize();
-	// movedots();
-	// }
 });
 
 $( ".major" ).click(function() {
@@ -155,8 +136,15 @@ function changeColor(r, color){
 	$(".circle"+r.toString()).css( "background-color", color);
 }
 
+
+
+
+
+// *********************************************************************************************
+// WEBCAM STUFF
+
+	// Makes sure it works in your browser
 	function hasGetUserMedia() {
-		// Note: Opera builds are unprefixed.
 		return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
 			navigator.mozGetUserMedia || navigator.msGetUserMedia);
 	}
@@ -198,12 +186,6 @@ function changeColor(r, color){
 		null
 	);
 
-
-
-	// For Diagonal Layout
-	// var notesPos = [0, 80, 160, 240, 320, 400, 480, 560, 640, 720, 800, 880, 960, 1040, 1120, 1200];
-	// var notesPos2 = [0, 60, 120, 180, 240, 300, 360, 420, 480, 540, 600, 660, 720, 780, 840, 900];
-
 	var notesPos = [0, 0, 0, 0, 0, 0, 0, 0, 1200, 1200, 1200, 1200, 1200, 1200, 1200, 1200];
 	var notesPos2 = [0, 120, 240, 360, 480, 600, 720, 840, 0, 120, 240, 360, 480, 600, 720, 840];
 	var notes3 = [261.63,293.66,329.63,349.23,392.00,440.00,493.88,523.25];
@@ -228,7 +210,7 @@ function changeColor(r, color){
 
 
 
-	// mirror video
+	// MIRROR THE VIDEO!
 	contextSource.translate(canvasSource.width, 0);
 	contextSource.scale(-1, 1);
 
@@ -243,6 +225,8 @@ function changeColor(r, color){
 		}
 	}
 
+
+// LOAD SOUNDS/SAMPLES
 	function loadSounds() {
 		notes = [];
 		console.log("LOADING");
@@ -343,6 +327,7 @@ function changeColor(r, color){
 		bufferLoader.load();
 	}
 
+// PLACE THE NODES ON THE CANVAS
 	function finishedLoading(bufferList) {
 		console.log("FINISHED LOADING");
 		if (source){
@@ -364,6 +349,8 @@ function changeColor(r, color){
 		start();
 	}
 
+
+// PLAY CORRECT SOUND
 	function playSound(obj) {
 
 		if (!obj.ready) return;
@@ -393,6 +380,7 @@ function changeColor(r, color){
 		update();
 	}
 
+// THE GOOD STUFF
 	function update() {
 		drawVideo();
 		blend();
@@ -430,6 +418,8 @@ function changeColor(r, color){
 		return (value > 0x15) ? 0xFF : 0;
 	}
 
+
+
 	function difference(target, data1, data2) {
 		// blend mode difference
 		if (data1.length != data2.length) return null;
@@ -442,6 +432,8 @@ function changeColor(r, color){
 			++i;
 		}
 	}
+
+
 
 	function differenceAccuracy(target, data1, data2) {
 		if (data1.length != data2.length) return null;
