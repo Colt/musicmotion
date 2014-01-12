@@ -1,9 +1,31 @@
+.touch{
+	color: white;
+	position: fixed;
+	z-index: 3;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+	top: 50%;
+	margin-top: -270px;
+	width: 550px;
+	height: 60px;
+	text-align: center;
+  list-style: none;
+}
+#info{
+	margin-top : 140px;
+}
+
 table{
 	float: right;
 	width: 700px;
 	cellspacing: 50px;
+
 	margin-right: 40px;
 
+}
+td{
+	padding-top: 40px;
 }
 @font-face {
 	font-family: 'icomoon';
@@ -1909,6 +1931,7 @@ body {
 	font-family: Helvetica, Arial, "sans serif";
 	font-size: 12px;
 	background-color: #34495e;
+	/*width: 1400px;*/
 }
 /*
 .circle1 {
@@ -2129,7 +2152,9 @@ body {
   border-radius: 50px;
 }*/
 
-
+div{
+	opacity: 0.7;
+}
 
 .circle1 {
 	opacity: 0.7;
